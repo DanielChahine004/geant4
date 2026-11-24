@@ -463,6 +463,8 @@ G4HadFinalState* G4QMDReaction::ApplyYourself(const G4HadProjectile& projectile,
         delete *it;
       }
       nucleuses.clear();
+      // remove the participants left from the rejected try, as in G4LightIonQMDReaction
+      system->Clear();
     }
   }
 
