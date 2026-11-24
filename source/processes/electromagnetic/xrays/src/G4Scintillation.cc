@@ -438,7 +438,10 @@ G4VParticleChange* G4Scintillation::PostStepDoIt(const G4Track& aTrack, const G4
     }
     else if (scnt == 2)
     {
-      numPhot = yield3 / sum_yields * fNumPhotons;
+      // remainder, so that the three components sum to fNumPhotons
+      // (independent truncation lost up to 2 photons per step)
+      numPhot = fNumPhotons - G4int(yield1 / sum_yields * fNumPhotons)
+                - G4int(yield2 / sum_yields * fNumPhotons);
       if (fScintillationByParticleType)
       {
         scintTime = timeconstant3;
