@@ -114,7 +114,7 @@ G4VParticleChange* G4OpMieHG::PostStepDoIt(const G4Track& aTrack, const G4Step& 
   newMomDir = newMomDir.unit();
 
   G4ThreeVector oldPol = aParticle->GetPolarization();
-  G4ThreeVector newPol = (newMomDir - oldPol / newMomDir.dot(oldPol)).unit();
+  G4ThreeVector newPol = (oldPol - newMomDir.dot(oldPol) * newMomDir).unit();
 
   if (newPol.mag() == 0.)
   {
